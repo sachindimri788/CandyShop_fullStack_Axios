@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/', getAllCandy);
 router.post('/', addCandy);
-router.post('/:id', candyQuantity);
+router.get('/:id', candyQuantity);
 router.delete('/:id', deleteCandy);
 router.put('/:id', updateCandyQuantity);
 

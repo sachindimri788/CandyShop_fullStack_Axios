@@ -13,7 +13,7 @@ form.addEventListener('submit', async (event) => {
     quantity
   };
   try {
-    await axios.post('http://localhost:3000', obj);
+    await axios.post('http://localhost:3000/shop', obj);
     await displayData();
     form.reset();
   } catch (error) {
@@ -24,7 +24,7 @@ form.addEventListener('submit', async (event) => {
 
 async function displayData() {
   try {
-    const response = await axios.get('http://localhost:3000');
+    const response = await axios.get('http://localhost:3000/shop');
     candyList = document.getElementById('candylist');
     candyList.innerHTML = '';
 
@@ -65,11 +65,11 @@ async function displayData() {
 async function updateQuantity(n, id) {
   n = Number(n);
 
-  candy = await axios.post(`http://localhost:3000/${id}`);
+  candy = await axios.get(`http://localhost:3000/shop/${id}`);
   quantity = candy.data.quantity
 
   if (quantity === 1 && n === 1 || quantity === 2 && n === 2 || quantity === 3 && n === 3) {
-    await axios.delete(`http://localhost:3000/${id}`);
+    await axios.delete(`http://localhost:3000/shop/${id}`);
     displayData();
   }
   else if (quantity < n) {
@@ -77,7 +77,7 @@ async function updateQuantity(n, id) {
     displayData();
   }
   else {
-    await axios.put(`http://localhost:3000/${id}`, { n });
+    await axios.put(`http://localhost:3000/shop/${id}`, { n });
     displayData();
   }
 }
